@@ -4,11 +4,16 @@
 
 @section('header')
     @include('partials.header')
+@endsection
 
-    <div>
+@section('content')
+    <ul class="container">
         @foreach ($comics as $comic)
-            $comic->title = $title
+            <li>{{ $comic->title }}</li>
         @endforeach
-    </div>
+    </ul>
+@endsection
 
+@section('footer')
+    @include('partials.footer')
 @endsection
