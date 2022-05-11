@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-    <h1> Io sono la Home </h1>
-    <a href="{{ route('comics.index') }}" class="btn btn-primary">vai alla lista dei fumetti </a>
+    <div class="container">
+        
+        <h1 class="text-center"> Io sono la Home </h1>
+    
+    </div>
 @endsection
 
 @section('footer')
