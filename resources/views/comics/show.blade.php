@@ -1,0 +1,1 @@
+{{-- card con il fumetto selezionato --}}

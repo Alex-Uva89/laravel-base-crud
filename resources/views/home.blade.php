@@ -7,11 +7,8 @@
 @endsection
 
 @section('content')
-    <ul class="container">
-        @foreach ($comics as $comic)
-            <li>{{ $comic->title }}</li>
-        @endforeach
-    </ul>
+    <h1> Io sono la Home </h1>
+    <a href="{{ route('comics.index') }}" class="btn btn-primary">vai alla lista dei fumetti </a>
 @endsection
 
 @section('footer')
