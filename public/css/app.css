@@ -12173,3 +12173,8 @@ fieldset:disabled .btn {
   }
 }
 
+.my-bg {
+  background-image: linear-gradient(284deg, rgb(239, 0, 242) 0%, rgb(255, 255, 255) 50%, rgb(242, 203, 0) 100%);
+  background-size: cover;
+}
+

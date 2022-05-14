@@ -7,83 +7,84 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $messages = [
+        'title.required' => 'il titolo è richiesto',
+        'title.max' => 'il titolo non può superare i 100 caratteri',
+        'description.required' => 'la descrizione è richiesta',
+        'thumb.required' => 'l\'immagine è richiesta',
+        'price.required' => 'il prezzo è richiesto',
+        'price.numeric' => 'il prezzo DEVE essere un numero',
+        'series.required' => 'la serie è richiesta',
+        'series.max' => 'la serie non può superare i 50 caratteri',
+        'sale_date.date' => 'la data di pubblicazione DEVE essere una data valida',
+        'type.max' => 'la tipologia non può superare i 50 caratteri',
+    ];
+
     public function index()
     {
-        $comics = Comic::paginate(10);
+        $comics = Comic::paginate(8);
         return view('comics.index', compact('comics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    protected $rulesCreate = [
+        'title' => 'required|:comics|max:100',
+        'description' => 'required',
+        'thumb' => 'required|max:250',
+        'price' => 'required|numeric',
+        'series' => 'required|max:50',
+        'sale_date' => 'nullable|date',
+        'type' => 'max:50'
+    ];
+
     public function store(Request $request)
     {
+        $this->validate($request, $this->rulesCreate, $this->messages); //validazione dei dati per creare nuovo albo
+
         $formData = $request->all();
         $comic = Comic::create($formData);
     
         return redirect()->route('comics.show', $comic->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comic  $comic
-     * @return \Illuminate\Http\Response
-     */
     public function show(Comic $comic)
     {
         return view('comics.show', compact('comic'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Comic  $comic
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comic  $comic
-     * @return \Illuminate\Http\Response
-     */
+    protected $rulesEdit = [
+        'title' => 'required|max:100',
+        'description' => 'required',
+        'thumb' => 'required|max:250',
+        'price' => 'required|numeric',
+        'series' => 'required|max:50',
+        'sale_date' => 'nullable|date',
+        'type' => 'max:50'
+    ];
+
     public function update(Request $request, Comic $comic)
     {
-        //
+        $this->validate($request, $this->messages, $this->rulesEdit);
+
+        $formData = $request->all();
+        $comic->update($formData);
+        return redirect()->route('comics.show', $comic->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Comic  $comic
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+        return redirect()->route('comics.index');
     }
 }

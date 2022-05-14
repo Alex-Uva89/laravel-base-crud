@@ -1,30 +1,26 @@
 @extends('../templates/base')
 
-@section('PageTitle', 'Aggiungi albo')
-
-@section('header')
-    @include('partials.header')
-@endsection
+@section('PageTitle', 'modifica albo')
 
 @section('content')
-<main>
-    <div class="container">
-        
-        {{-- creazione form per inserire i dati --}}
-            <form action="{{ route('comics.store') }}" method="POST">
+    <main>
+        <div class="container">
+
+            <form class="my-3" action="{{ route('comics.update', $comic->id) }}" method="POST">
                 @csrf
-                <div>
+                @method('PUT')
+                <div class="form-group">
 
                     <label for="title">Titolo</label>
-                    <input type="text" id="title" class="form-control" name="title" value="{{ old('title') }}" placeholder="inserisci il titolo del nuovo albo">
+                    <input type="text" class="form-control" id="title" name="title" value="{{ $comic->title }}">
                     @error('title')
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
                         </div>
                     @enderror
 
                     <label for="description">Descrizione</label>
-                    <input type="text" id="description" class="form-control" name="description" value="{{ old('description') }}" placeholder="inserisci la descrizione">
+                    <input type="text" class="form-control" id="description" name="description" value="{{ $comic->description }}">
                     @error('description')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
@@ -32,7 +28,7 @@
                     @enderror
 
                     <label for="thumb">Immagine</label>
-                    <input type="text" id="thumb" class="form-control" name="thumb" value="{{ old('thumb') }}" placeholder="inserisci immagine">
+                    <input type="text" class="form-control" id="thumb" name="thumb" value="{{ $comic->thumb }}">
                     @error('thumb')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
@@ -40,7 +36,7 @@
                     @enderror
 
                     <label for="price">Prezzo</label>
-                    <input type="text" id="price" class="form-control" name="price" value="{{ old('price') }}" placeholder="inserisci prezzo">
+                    <input type="text" class="form-control" id="price" name="price" value="{{ $comic->price }}">
                     @error('price')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
@@ -48,15 +44,15 @@
                     @enderror
 
                     <label for="series">Serie</label>
-                    <input type="text" id="series" class="form-control" name="series" value="{{ old('series') }}" placeholder="inserisci serie">
+                    <input type="text" class="form-control" id="series" name="series" value="{{ $comic->series }}">
                     @error('series')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
                         </div>
                     @enderror
 
-                    <label for="date">Data pubblicazione</label>
-                    <input type="date" class="form-control" id="date" name="sale_date" value="{{ old('sale_date') }}" placeholder="inserisci data">
+                    <label for="date">Data di pubblicazione</label>
+                    <input type="date" class="form-control" id="date" name="sale_date" value="{{ $comic->sale_date }}">
                     @error('sale_date')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
@@ -64,7 +60,7 @@
                     @enderror
 
                     <label for="type">Tipologia</label>
-                    <input type="text" class="form-control" id="type" name="type" value="{{ old('type') }}" placeholder="inserisci tipo">
+                    <input type="text" class="form-control" id="type" name="type" value="{{ $comic->type }}">
                     @error('type')
                         <div class="alert alert-danger mt-3" role="alert">
                             {{ $message }}
@@ -72,11 +68,10 @@
                     @enderror
 
                 </div>
-                <button type="submit" class="btn btn-success mt-3" id="saveComic">Salva!</button>
-                <a class="btn btn-white mt-3" href="{{ url()->previous() }}">Indietro</a>
+                <button type="submit" class="btn btn-success mt-3" id="saveComic">Save</button>
+
+                <a class="btn btn-primary mt-3" href="{{ url()->previous() }}">Indietro</a>
             </form>
-
-
         </div>
-</main>
+    </main>
 @endsection

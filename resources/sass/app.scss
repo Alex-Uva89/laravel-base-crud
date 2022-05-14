@@ -1,1 +1,9 @@
-@import "~bootstrap/scss/bootstrap"
+@import "~bootstrap/scss/bootstrap";
+
+
+.my-bg {
+
+    background-image: linear-gradient(284deg, rgba(239,0,242,1) 0%, rgba(255,255,255,1) 50%, rgba(242,203,0,1) 100%);;
+    background-size: cover;
+
+}

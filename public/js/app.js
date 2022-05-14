@@ -19380,6 +19380,15 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var vis = 1000;
+
+function confirm(message) {
+  var a = document.createElement('div');
+  a.innerHTML = "<div class=\"alert alert-danger d-flex align-items-center\" role=\"alert\">\n  <svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" role=\"img\" aria-label=\"Danger:\"><use xlink:href=\"#exclamation-triangle-fill\"/></svg>\n  <div>" + message + "\n  </div>\n</div>";
+}
+
+;
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
